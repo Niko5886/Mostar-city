@@ -197,7 +197,7 @@
       bazaar_h2: "A short road from Zabardo.",
       bazaar_p:
         "They are located a few kilometres from the village of Zabardo. There is a road leading to the site, which, after branching off from the road to Zabardo, is about 8 kilometres long.",
-      note_btn: "Open route notes",
+      note_btn: "Learn more",
     },
     bg: {
       logo: "България",
@@ -212,7 +212,7 @@
       bazaar_h2: "Кратък път от Забърдо.",
       bazaar_p:
         "Намират се на няколко километра от село Забърдо. До обекта води път, който, след като се отклони от пътя за Забърдо, е дълъг около 8 километра.",
-      note_btn: "Отвори бележки за маршрута",
+      note_btn: "Научете повече",
     },
   };
 

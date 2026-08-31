@@ -432,6 +432,7 @@ button { border: 0; font: inherit; }
   box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
   pointer-events: auto;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .note-button span:first-child {
