@@ -175,3 +175,79 @@
   // ---------- Init ----------
   requestTick();
 })();
+
+/* ============================================================
+   Bilingual toggle (EN | BG)
+   Swaps every [data-i18n] node's text and remembers the choice.
+   ============================================================ */
+(() => {
+  "use strict";
+
+  const translations = {
+    en: {
+      logo: "Bulgaria",
+      hero: "RHODOPES",
+      intro:
+        "A stone arch, emerald water, and a compact old city made for slow mornings, late light, and one unforgettable crossing.",
+      bridge_h2: "Carved by the river.",
+      bridge_p:
+        "The Wonderful Bridges (also known as the Rock Bridges) are a rock phenomenon located in the karst valley of the Erkyupriya River in the Western Rhodopes. They were formed as a result of the erosional activity of a once high-water river, which transformed the cracks in the marble into a deep water cave,",
+      fact1_dd: "The bridge was formed",
+      fact2_dd: "The Wonderful Bridges area inscribed by UNESCO",
+      bazaar_h2: "A short road from Zabardo.",
+      bazaar_p:
+        "They are located a few kilometres from the village of Zabardo. There is a road leading to the site, which, after branching off from the road to Zabardo, is about 8 kilometres long.",
+      note_btn: "Open route notes",
+    },
+    bg: {
+      logo: "България",
+      hero: "РОДОПИ",
+      intro:
+        "Каменна арка, изумрудена вода и компактен стар град, създадени за бавни утрини, късна светлина и едно незабравимо преминаване.",
+      bridge_h2: "Издълбани от реката.",
+      bridge_p:
+        "Чудните мостове (известни още като Скалните мостове) са скален феномен, разположен в карстовата долина на река Еркюприя в Западните Родопи. Те са се образували в резултат на ерозионната дейност на някога пълноводна река, която е превърнала пукнатините в мрамора в дълбока водна пещера,",
+      fact1_dd: "Мостът се е образувал",
+      fact2_dd: "Районът на Чудните мостове, вписан от ЮНЕСКО",
+      bazaar_h2: "Кратък път от Забърдо.",
+      bazaar_p:
+        "Намират се на няколко километра от село Забърдо. До обекта води път, който, след като се отклони от пътя за Забърдо, е дълъг около 8 километра.",
+      note_btn: "Отвори бележки за маршрута",
+    },
+  };
+
+  const nodes = document.querySelectorAll("[data-i18n]");
+  const buttons = document.querySelectorAll(".lang-option");
+
+  function applyLanguage(lang) {
+    if (!translations[lang]) lang = "en";
+    const dict = translations[lang];
+    nodes.forEach((node) => {
+      const value = dict[node.dataset.i18n];
+      if (value != null) node.textContent = value;
+    });
+    document.documentElement.lang = lang;
+    buttons.forEach((btn) => {
+      const active = btn.dataset.lang === lang;
+      btn.classList.toggle("is-active", active);
+      btn.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+    try {
+      localStorage.setItem("wb-lang", lang);
+    } catch (e) {
+      /* storage unavailable — ignore */
+    }
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => applyLanguage(btn.dataset.lang));
+  });
+
+  let initial = "en";
+  try {
+    initial = localStorage.getItem("wb-lang") || "en";
+  } catch (e) {
+    /* storage unavailable — default to en */
+  }
+  applyLanguage(initial);
+})();

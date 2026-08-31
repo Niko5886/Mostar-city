@@ -21,11 +21,12 @@
           />
 
           <header class="site-header" aria-label="Primary navigation">
-            <a class="site-logo" href="#cinema">Bulgaria</a>
-            <button class="language-switcher" aria-label="Change language">
-              <span>EN</span>
-              <span aria-hidden="true">⌄</span>
-            </button>
+            <a class="site-logo" href="#cinema" data-i18n="logo">Bulgaria</a>
+            <div class="language-switcher" role="group" aria-label="Language / Език">
+              <button type="button" class="lang-option is-active" data-lang="en" aria-pressed="true">EN</button>
+              <span class="lang-sep" aria-hidden="true">|</span>
+              <button type="button" class="lang-option" data-lang="bg" aria-pressed="false">BG</button>
+            </div>
           </header>
 
           <div class="back-stack">
@@ -42,7 +43,7 @@
             />
           </div>
 
-          <h1 class="hero-title">RHODOPES</h1>
+          <h1 class="hero-title" data-i18n="hero">RHODOPES</h1>
 
           <img
             class="scene-img splitframe-img splitframe-left"
@@ -71,30 +72,30 @@
         </div>
 
         <section class="intro-copy" aria-label="The Wonderful Bridges overview">
-          <p>A stone arch, emerald water, and a compact old city made for slow mornings, late light, and one unforgettable crossing.</p>
+          <p data-i18n="intro">A stone arch, emerald water, and a compact old city made for slow mornings, late light, and one unforgettable crossing.</p>
         </section>
 
         <section class="story-panel story-panel-bridge" aria-label="Wonderful Bridges details">
-          <h2>Carved by the river.</h2>
-          <p>The Wonderful Bridges (also known as the Rock Bridges) are a rock phenomenon located in the karst valley of the Erkyupriya River in the Western Rhodopes. They were formed as a result of the erosional activity of a once high-water river, which transformed the cracks in the marble into a deep water cave,</p>
+          <h2 data-i18n="bridge_h2">Carved by the river.</h2>
+          <p data-i18n="bridge_p">The Wonderful Bridges (also known as the Rock Bridges) are a rock phenomenon located in the karst valley of the Erkyupriya River in the Western Rhodopes. They were formed as a result of the erosional activity of a once high-water river, which transformed the cracks in the marble into a deep water cave,</p>
           <dl class="facts">
             <div>
               <dt>1949</dt>
-              <dd>The bridge was formed</dd>
+              <dd data-i18n="fact1_dd">The bridge was formed</dd>
             </div>
             <div>
               <dt>2005</dt>
-              <dd>The Wonderful Bridges area inscribed by UNESCO</dd>
+              <dd data-i18n="fact2_dd">The Wonderful Bridges area inscribed by UNESCO</dd>
             </div>
           </dl>
         </section>
 
         <section class="story-panel story-panel-bazaar" aria-label="Access route details">
-          <h2>A short road from Zabardo.</h2>
-          <p>They are located a few kilometres from the village of Zabardo. There is a road leading to the site, which, after branching off from the road to Zabardo, is about 8 kilometres long.</p>
+          <h2 data-i18n="bazaar_h2">A short road from Zabardo.</h2>
+          <p data-i18n="bazaar_p">They are located a few kilometres from the village of Zabardo. There is a road leading to the site, which, after branching off from the road to Zabardo, is about 8 kilometres long.</p>
           <button class="note-button">
             <span aria-hidden="true">↗</span>
-            <span>Open route notes</span>
+            <span data-i18n="note_btn">Open route notes</span>
           </button>
         </section>
       </div>

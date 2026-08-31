@@ -292,26 +292,37 @@ button { border: 0; font: inherit; }
 }
 
 .language-switcher {
-  color: rgba(253, 241, 225, 0.86);
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-weight: 700;
   line-height: 1;
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
 }
 
-.language-switcher {
-  justify-self: end;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
+.lang-option {
   padding: 0;
   background: transparent;
+  color: rgba(253, 241, 225, 0.5);
   font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
   cursor: pointer;
+  transition: color 200ms ease;
 }
 
-.language-switcher span {
-  display: inline-flex;
+.lang-option:hover {
+  color: rgba(253, 241, 225, 0.85);
+}
+
+.lang-option.is-active {
+  color: rgba(253, 241, 225, 0.95);
+}
+
+.lang-sep {
+  color: rgba(253, 241, 225, 0.4);
+  font-weight: 400;
   line-height: 1;
 }
 
