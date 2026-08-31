@@ -69,6 +69,17 @@ body {
 
 button { border: 0; font: inherit; }
 
+/* Never show the text I-beam / caret over non-interactive content — only
+   genuinely clickable elements get the pointer. */
+html { cursor: default; }
+
+a[href],
+button,
+[role="button"],
+label[for] {
+  cursor: pointer;
+}
+
 .site-shell { min-height: 100vh; }
 
 /* ---------- 4. Scroll rig ---------- */
@@ -299,6 +310,7 @@ button { border: 0; font: inherit; }
   font-weight: 700;
   line-height: 1;
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+  user-select: none;
 }
 
 .lang-option {
