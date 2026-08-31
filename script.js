@@ -1,7 +1,8 @@
 /* Mostar city — cinematic scroll story
    ============================================================
-   Animation engine (step 6) + infinite slider logic (step 7)
-   Single scroll-driven rAF loop, lerp-smoothed, writing CSS
+   Scroll-driven animation engine.
+   A single self-halting requestAnimationFrame loop reads the
+   scroll offset, smooths it with lerp inertia, and writes CSS
    custom properties that the stylesheet binds to GPU transforms.
    ============================================================ */
 
@@ -12,11 +13,6 @@
   const section = document.querySelector(".cinema-scroll");
   const root = document.documentElement;
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
-  const track = document.querySelector(".sights-track");
-  const sightsControls = document.querySelector(".sights-controls");
-  const prevBtn = document.querySelector(".sight-prev");
-  const nextBtn = document.querySelector(".sight-next");
-  const originalSightCards = Array.from(document.querySelectorAll(".sight-card"));
 
   // ---------- State ----------
   let targetMouseX = 0;
@@ -27,9 +23,6 @@
   let smoothScroll = 0;
   let initialized = false;
   let rafPending = false;
-  let sightCards = [];
-  const originalSightCount = originalSightCards.length;
-  let activeSight = originalSightCount;
 
   // ---------- Helpers ----------
   const clamp = (v, min = 0, max = 1) => Math.min(max, Math.max(min, v));
@@ -56,79 +49,7 @@
 
   const set = (name, value) => root.style.setProperty(name, value);
 
-  // ============================================================
-  // Infinite slider logic (step 7)
-  // ============================================================
-  function setupSightSlider() {
-    track.replaceChildren();
-    for (let setIndex = 0; setIndex < 3; setIndex++) {
-      originalSightCards.forEach((card, cardIndex) => {
-        const clone = card.cloneNode(true);
-        clone.dataset.sightIndex = setIndex * originalSightCount + cardIndex;
-        track.appendChild(clone);
-      });
-    }
-    sightCards = Array.from(track.querySelectorAll(".sight-card"));
-    activeSight = originalSightCount;
-
-    sightCards.forEach((card) => {
-      card.addEventListener("click", () => selectSightCard(card));
-      card.addEventListener("keydown", (event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          selectSightCard(card);
-        }
-      });
-    });
-
-    track.addEventListener("transitionend", normalizeSightSlider);
-    updateSightSlider();
-  }
-
-  function updateSightSlider() {
-    if (!sightCards.length) return;
-    const cardWidth = sightCards[0].offsetWidth;
-    const gap = parseFloat(getComputedStyle(track).columnGap || "0");
-    set("--sights-shift", `${-(cardWidth + gap) * activeSight}px`);
-    sightCards.forEach((card) => {
-      card.classList.toggle(
-        "is-active",
-        Number(card.dataset.sightIndex) === activeSight
-      );
-    });
-  }
-
-  function moveSightSlider(dir) {
-    activeSight += dir;
-    updateSightSlider();
-  }
-
-  function selectSightCard(card) {
-    const index = Number(card.dataset.sightIndex);
-    if (Number.isFinite(index)) activeSight = index;
-    updateSightSlider();
-  }
-
-  function jumpSightSlider(i) {
-    track.classList.add("is-jumping");
-    activeSight = i;
-    updateSightSlider();
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => track.classList.remove("is-jumping"));
-    });
-  }
-
-  function normalizeSightSlider() {
-    if (activeSight >= originalSightCount * 2) {
-      jumpSightSlider(activeSight - originalSightCount);
-    } else if (activeSight < originalSightCount) {
-      jumpSightSlider(activeSight + originalSightCount);
-    }
-  }
-
-  // ============================================================
-  // Animation engine (step 6)
-  // ============================================================
+  // ---------- Animation engine ----------
   function update() {
     rafPending = false;
 
@@ -148,9 +69,6 @@
     const frame3 = segmentInOut(smoothScroll, 1760, 2140, 2540, 2700);
     const progress = clamp(smoothScroll / 2700);
     const introExit = smoothstep(90, 650, smoothScroll);
-    const sightsEnterRaw = smoothstep(2760, 3560, smoothScroll);
-    const sightsEnter = Math.pow(sightsEnterRaw, 1.55);
-    const sightsControlsEnter = smoothstep(3360, 3660, smoothScroll);
     const blurActive = clamp(frame2.active + frame3.active);
     const frame2Opacity = frame2.active * (1 - frame3.enter);
     const splitDrift = Math.pow(frame2.enter, 1.5);
@@ -160,10 +78,6 @@
       0.76 + progress * 0.2 + frame2.enter * 0.18 + frame3.enter * 0.16;
     const sharedHeroY = progress * -74;
     const sharedHeroScale = progress * 0.23;
-    const sightsScreenTop =
-      Math.min(220, Math.max(112, window.innerHeight * 0.19)) - 50;
-    const sightsParentTop =
-      window.innerHeight - (window.innerHeight - sightsScreenTop) / backScale;
 
     // Pointer parallax (custom props; forced to 0 under reduced motion)
     set("--mx", reduceMotion.matches ? 0 : mouseX.toFixed(4));
@@ -228,16 +142,6 @@
       `calc(-50% + ${-frame3.exit * 86 + (1 - frame3.enter) * 58}px)`
     );
 
-    set("--sights-opacity", sightsEnter);
-    set("--sights-controls-opacity", sightsControlsEnter);
-    sightsControls.classList.toggle("is-ready", sightsControlsEnter > 0.98);
-    set("--sights-visibility", sightsEnter > 0.01 ? "visible" : "hidden");
-    set("--sights-y", "0px");
-    set("--sights-enter-x", `${(1 - sightsEnter) * 420}vw`);
-    set("--sights-scale", 1 / backScale);
-    set("--sights-top", `${sightsParentTop}px`);
-    set("--sights-screen-top", `${sightsScreenTop}px`);
-
     if (
       Math.abs(smoothScroll - targetScroll) > 0.08 ||
       Math.abs(mouseX - targetMouseX) > 0.001 ||
@@ -256,10 +160,7 @@
   // ---------- Listeners ----------
   window.addEventListener("scroll", requestTick, { passive: true });
 
-  window.addEventListener("resize", () => {
-    updateSightSlider();
-    requestTick();
-  });
+  window.addEventListener("resize", requestTick);
 
   window.addEventListener(
     "pointermove",
@@ -271,10 +172,6 @@
     { passive: true }
   );
 
-  if (prevBtn) prevBtn.addEventListener("click", () => moveSightSlider(-1));
-  if (nextBtn) nextBtn.addEventListener("click", () => moveSightSlider(1));
-
   // ---------- Init ----------
-  setupSightSlider();
   requestTick();
 })();
