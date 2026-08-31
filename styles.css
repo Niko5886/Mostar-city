@@ -357,28 +357,6 @@ button { border: 0; font: inherit; }
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.42);
 }
 
-.hero-tags {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 26px;
-}
-
-.hero-tags span {
-  min-height: 42px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 25px;
-  color: var(--ink);
-  border-radius: 999px;
-  background: #fdf1e1;
-  font-size: 0.98rem;
-  font-weight: 500;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
-}
-
 /* Story panels (z 10) */
 .story-panel {
   z-index: 10;
@@ -664,8 +642,6 @@ button { border: 0; font: inherit; }
   .frame-two-img { width: 176vw; }
   .intro-copy { bottom: 42px; }
   .intro-copy p, .story-panel p { font-size: 1rem; }
-  .hero-tags { gap: 8px; }
-  .hero-tags span { min-height: 38px; padding: 0 16px; font-size: 0.88rem; }
   .story-panel { top: 42%; }
   .story-panel-bazaar { top: 26%; }
   .story-panel h2 { font-size: 2.45rem; }
