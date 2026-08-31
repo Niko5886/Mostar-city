@@ -198,6 +198,9 @@
       bazaar_p:
         "They are located a few kilometres from the village of Zabardo. There is a road leading to the site, which, after branching off from the road to Zabardo, is about 8 kilometres long.",
       note_btn: "Open route notes",
+      footer_brand: "The Wonderful Bridges",
+      footer_place: "Western Rhodopes, Bulgaria",
+      footer_top: "Back to top",
     },
     bg: {
       logo: "България",
@@ -213,6 +216,9 @@
       bazaar_p:
         "Намират се на няколко километра от село Забърдо. До обекта води път, който, след като се отклони от пътя за Забърдо, е дълъг около 8 километра.",
       note_btn: "Отвори бележки за маршрута",
+      footer_brand: "Чудните мостове",
+      footer_place: "Западни Родопи, България",
+      footer_top: "Нагоре",
     },
   };
 
