@@ -11,8 +11,14 @@
 /* ---------- 1. Font ---------- */
 @font-face {
   font-family: "Ogg Medium";
-  src: url("https://dcym8fthxf5uu.cloudfront.net/fonts/247a073c-29f5-4a89-aa3a-741020f346fc/OggText-Medium.woff2")
-    format("woff2");
+  /* Local copy first: the remote CloudFront host serves the woff2 but sends no
+     Access-Control-Allow-Origin header, and browsers require CORS for fonts, so
+     the cross-origin load fails ("A network error occurred"). The same-origin
+     file renders reliably; the remote URL is kept as a fallback source. */
+  src:
+    url("fonts/OggText-Medium.woff2") format("woff2"),
+    url("https://dcym8fthxf5uu.cloudfront.net/fonts/247a073c-29f5-4a89-aa3a-741020f346fc/OggText-Medium.woff2")
+      format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
