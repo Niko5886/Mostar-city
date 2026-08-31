@@ -278,7 +278,7 @@ button { border: 0; font: inherit; }
   left: 0;
   right: 0;
   display: grid;
-  grid-template-columns: minmax(260px, 1fr) auto minmax(260px, 1fr);
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 32px;
   padding: 32px;
@@ -297,25 +297,11 @@ button { border: 0; font: inherit; }
   white-space: nowrap;
 }
 
-.site-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: clamp(24px, 2.2vw, 44px);
-}
-
-.site-nav a,
 .language-switcher {
   color: rgba(253, 241, 225, 0.86);
   font-weight: 700;
   line-height: 1;
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
-}
-
-.site-nav a {
-  font-size: 20px;
-  font-weight: 400;
-  text-decoration: none;
 }
 
 .language-switcher {
@@ -628,15 +614,6 @@ button { border: 0; font: inherit; }
 @media (max-width: 640px) {
   .stage { min-height: 640px; }
   .site-header { grid-template-columns: 1fr auto; gap: 18px; padding: 24px; }
-  .site-nav {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    justify-content: flex-start;
-    gap: 18px;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .site-nav::-webkit-scrollbar { display: none; }
   .hero-title { top: 16vh; font-size: 4.5rem; }
   .bridge-img { bottom: 2vh; width: 190vw; }
   .frame-two-img { width: 176vw; }
