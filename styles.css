@@ -477,7 +477,11 @@ button { border: 0; font: inherit; }
 /* Slider lives inside .back-stack; the fade is done via visibility + X
    translate, not opacity (opacity stays 1). */
 .sights-slider {
-  z-index: 2;
+  /* Spec puts this at z-index 2, but .back-bazaar (z-index 3, same stacking
+     context inside .back-stack) then overlaps the lower half of the cards at
+     max zoom and hides their titles/text. Raised to 4 so the cards stay fully
+     in front and readable. */
+  z-index: 4;
   left: 0;
   right: 0;
   top: var(--sights-top);
