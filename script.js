@@ -1,4 +1,4 @@
-/* Mostar city — cinematic scroll story
+/* The Wonderful Bridges — cinematic scroll story
    ============================================================
    Scroll-driven animation engine.
    A single self-halting requestAnimationFrame loop reads the
