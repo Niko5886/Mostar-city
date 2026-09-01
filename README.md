@@ -7,6 +7,10 @@
 </p>
 
 <p align="center">
+  <img src="https://img.shields.io/badge/%F0%9F%94%97%20Live%20Demo-Coming%20Soon-fdf1e1?style=for-the-badge&labelColor=111411" alt="Live Demo — Coming Soon" height="34" />
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/Vanilla_JS-no_frameworks-f7df1e?logo=javascript&logoColor=000" alt="Vanilla JS" />
   <img src="https://img.shields.io/badge/build-none-2ea44f" alt="No build step" />
   <img src="https://img.shields.io/badge/i18n-EN%20%7C%20BG-4ab5e0" alt="Bilingual EN | BG" />
