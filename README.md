@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%F0%9F%94%97%20Live%20Demo-Coming%20Soon-fdf1e1?style=for-the-badge&labelColor=111411" alt="Live Demo — Coming Soon" height="34" />
+  <img src="https://img.shields.io/badge/%F0%9F%94%97%20Live%20Demo%20%E2%86%92-Coming%20Soon-fdf1e1?style=for-the-badge&labelColor=111411" alt="Live Demo — Coming Soon" height="34" />
 </p>
 
 <p align="center">
