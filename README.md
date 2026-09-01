@@ -60,8 +60,8 @@ Pointer movement adds a subtle parallax to every layer.
 No build, no install — just serve the folder with any static server:
 
 ```bash
-git clone https://github.com/Niko5886/Mostar-city.git
-cd Mostar-city
+git clone https://github.com/Niko5886/wonderful-bridges.git
+cd wonderful-bridges
 python -m http.server 5500
 # then open http://localhost:5500
 ```
